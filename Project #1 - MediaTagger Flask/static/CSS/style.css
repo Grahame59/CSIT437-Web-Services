@@ -1,9 +1,14 @@
 /* static/CSS/style.css */
-.root
+:root
 {
     --purple: #6a1b9a;
-    
+    --dark-purple: #4a0072;
+    --light-gray: #afafaf;
+    --dark-gray: #6a6a6a;
+    --vibr-purple: #d000ff;
+    --lightened-black: #1c1c1c;
 }
+
 body 
 {
     font-family: Arial, sans-serif;
@@ -12,23 +17,33 @@ body
     padding: 40px;
 }
 
-nav 
-{
-    background-color: var(--purple);
-    padding: 15px;
-}
-
 nav a 
 {
+    background-color: #6a1b9a;
+    border-radius: 10px;
     color: white;
-    margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
+    font-size: 38px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    transition: transform 0.3s ease, 
+                background-color 0.3s ease, 
+                color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    display: inline-block;
+
 }
 
 nav a:hover 
 {
-    text-decoration: underline;
+    background-color: var(--lightened-black); 
+    color: var(--vibr-purple);
+    text-decoration: none;
+    transform: scale(1.08);
+
 }
 
 footer 
@@ -38,4 +53,135 @@ footer
     text-align: center;
     padding: 10px;
     margin-top: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+
 }
+
+/* index.html styles */
+.btn-purp 
+{
+    background-color: var(--purple);
+    color: white;
+    padding: 12px 24px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: transform 0.3s ease, 
+                background-color 0.3s ease, 
+                color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    display: inline-block;
+} 
+
+.btn-purp:hover 
+{
+    background-color: var(--lightened-black); 
+    color: var(--vibr-purple);
+    text-decoration: none;
+    transform: scale(1.08);
+
+}
+
+.banner-title 
+{
+    background-color: var(--purple);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+#split-container 
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 20px 40px;
+    flex-wrap: wrap; /* allows for wrapping on smaller screens */
+}
+
+.split-box 
+{
+    flex: 1;
+    background-color: #f3f3f3;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    min-width: 300px;
+    min-height: 300px;
+}
+
+#upload-pane 
+{
+    flex: 1; /* 1/3 of space */
+}
+
+#gallery-pane 
+{
+    flex: 2; /* 2/3 of space so more wide. */
+    display: flex;
+    flex-direction: column;
+    max-height: 400px; /* Adjust as needed */
+    overflow-y: auto;
+}
+
+/* Left Panel CSS : Uploading */
+#upload-pane h2
+{
+    color: var(--purple);
+    margin-bottom: 10px;
+    background-color: var(--light-gray);
+}
+
+/* Right Panel CSS: Gallery */
+#gallery-content
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive 3x3 grid */
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px
+}
+
+#gallery-pane h2 
+{
+    color: var(--purple);
+    margin-bottom: 10px;
+    background-color: var(--light-gray);
+}
+
+/* Style for eachindvidual image container */
+#gallery-content div 
+{
+    position: relative;
+    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+}
+
+#gallery-content div:hover 
+{
+    transform: scale(1.05);
+}
+
+#gallery-content img 
+{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+#gallery-content img:hover 
+{
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+

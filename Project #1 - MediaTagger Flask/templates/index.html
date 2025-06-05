@@ -12,14 +12,33 @@
     <!-- Partial using % include for my nav -->
     {% include 'PartialPages/navMain.html' %}
 
-    <h1>Welcome to Personal Media Tagging App</h1>
+    <h1 class = "banner-title">Welcome to Personal Media Tagging App</h1>
     
-    
-    <a href = "/upload">Upload Media</a> | 
-    <a href = "/gallery">View Gallery</a>
+    <div id = "split-container">
+        <div id = "upload-pane" class = "split-box">
+            <h2>Upload Your Media</h2>
+            <form id = "uploadForm">
+                <input type = "file" name = "media" required><br><br>
+                <input type = "text" name = "tags" placeholder = "Enter tags (comma-separated)" required><br><br>
+                <button type = "submit" class = "btn-purp">Upload</button>
+            </form>
+            <div id = "upload-status"></div>
+        </div>
+
+        <div id = "gallery-pane" class = "split-box">
+            <h2>Your Gallery</h2>
+            <div id = "gallery-content">
+                <!-- Media loaded here via JS -->
+            </div>
+        </div>
+    </div>
 
     <!-- Footer Partial -->
     {% include 'PartialPages/footerMain.html' %}
+
+    <!-- Script Partials -->
+    <script src="{{ url_for('static', filename='js/galleryHandler.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/uploadHandler.js') }}"></script>
 
 </body>
 </html>
