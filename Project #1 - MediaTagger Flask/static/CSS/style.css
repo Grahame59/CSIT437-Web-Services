@@ -1,0 +1,41 @@
+/* static/CSS/style.css */
+.root
+{
+    --purple: #6a1b9a;
+    
+}
+body 
+{
+    font-family: Arial, sans-serif;
+    background-color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+nav 
+{
+    background-color: var(--purple);
+    padding: 15px;
+}
+
+nav a 
+{
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover 
+{
+    text-decoration: underline;
+}
+
+footer 
+{
+    background-color: var(--purple);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 50px;
+}

@@ -1,15 +1,25 @@
+<!-- templates/index.html -->
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Media Tagger</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
+
+    <!-- Partial using % include for my nav -->
+    {% include 'PartialPages/navMain.html' %}
+
     <h1>Welcome to Personal Media Tagging App</h1>
-    <a href = "/upload">Upload Media</a> | <a href = "/gallery">View Gallery</a>
+    
+    
+    <a href = "/upload">Upload Media</a> | 
+    <a href = "/gallery">View Gallery</a>
 
-
-
+    <!-- Footer Partial -->
+    {% include 'PartialPages/footerMain.html' %}
 
 </body>
 </html>
