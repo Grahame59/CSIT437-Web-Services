@@ -138,16 +138,73 @@ footer
 }
 
 /* Right Panel CSS: Gallery */
+.gallery-wrapper 
+{
+    position: relative;
+    padding-top: 30px; /* leave space for button */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#expandGalleryBtn 
+{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#gallery-pane.fullscreen-gallery 
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 40px;
+    margin: 20px 20px;
+    border-radius: 15px;
+    min-height: 700px;
+    z-index: 999;
+    background-color: white;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
 #gallery-content
 {
     display: grid;
+    flex-grow: 1;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive 3x3 grid */
     gap: 20px;
     padding: 20px;
     justify-items: center;
-    flex: 1;
     overflow-y: auto;
     padding-right: 10px
+}
+
+.tag-search 
+{
+    width: 60%;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--light-gray);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 #gallery-pane h2 
@@ -185,3 +242,52 @@ footer
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* Gallery JS Section Styling */
+.gallery-card 
+{
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: #fff;
+}
+
+.gallery-media 
+{
+    max-width: 100%;
+    border-radius: 6px;
+}
+
+.gallery-caption 
+{
+    color: var(--purple);
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.gallery-download 
+{
+    display: inline-block;
+    margin-top: 6px;
+    color: white;
+    background-color: var(--purple);
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.gallery-delete 
+{
+    margin-top: 8px;
+    background-color: var(--purple);
+    color: white;
+    border: none;
+    font-size: medium;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}

@@ -30,7 +30,12 @@ def init_db():
 def index():
     return render_template('index.html')
 
-@app.route('/api/upload', methods=['POST'])
+ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'heic', 'mp4', 'mov', 'webm'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/api/upload', methods = ['POST'])
 def api_upload():
     """
     Handle media file uploads.
@@ -41,7 +46,7 @@ def api_upload():
     file = request.files.get('media')
     tags = request.form.get('tags', '')
 
-    if file:
+    if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)  # Sanitize the filename
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)  # Save file to disk
@@ -52,7 +57,7 @@ def api_upload():
         
         return jsonify({'success': True, 'message': 'File uploaded successfully.'})
 
-    return jsonify({'success': False, 'message': 'No file uploaded.'}), 400
+    return jsonify({'success': False, 'message': 'No file uploaded or Invalid file type uploaded.'}), 400
 
 @app.route('/api/gallery')
 def api_gallery():
@@ -62,6 +67,46 @@ def api_gallery():
     with sqlite3.connect(DB) as conn:
         rows = conn.execute('SELECT filename, tags FROM media ORDER BY id DESC').fetchall()
     return jsonify([{'filename': r[0], 'tags': r[1]} for r in rows])
+
+@app.route('/api/delete', methods = ['POST'])
+def api_delete():
+    """
+    Delete a media file from the filesystem and remove its DB entry.
+    """
+    data = request.get_json()
+    filename = data.get('filename')
+
+    if not filename:
+        return jsonify({'success': False, 'message': 'No filename provided'}), 400
+
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+    # Delete the file from the uploads folder
+    if os.path.exists(filepath):
+        os.remove(filepath)
+    else:
+        return jsonify({'success': False, 'message': 'File not found'}), 404
+
+    # Remove the record from the database
+    with sqlite3.connect(DB) as conn:
+        conn.execute('DELETE FROM media WHERE filename = ?', (filename,))
+
+    return jsonify({'success': True, 'message': f'"{filename}" deleted.'})
+
+@app.route('/api/update-tags', methods = ['POST'])
+def update_tags():
+    data = request.get_json()
+    filename = data.get('filename')
+    new_tags = data.get('tags', '')
+
+    if not filename:
+        return jsonify({'success': False, 'message': 'Missing filename'}), 400
+
+    with sqlite3.connect(DB) as conn:
+        conn.execute('UPDATE media SET tags = ? WHERE filename = ?', (new_tags, filename))
+
+    return jsonify({'success': True, 'message': 'Tags updated successfully'})
+
 
 # ---------- App Entry Point ----------
 
