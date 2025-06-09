@@ -1,13 +1,17 @@
-async function loadGallery() 
+let allMediaItems = [];
+function setGalleryItems(items) 
 {
-    const res = await fetch('/api/gallery');
-    const data = await res.json();
-
+    allMediaItems = items;
+}
+async function loadGallery(filteredData = null) 
+{
     const gallery = document.getElementById('gallery-content');
     gallery.innerHTML = ''; // Clear previous
 
-    // Store gallery data globally for filtering
-    setGalleryItems(data);
+    // uses passed filtered data or fetched from server
+    const data = filteredData || await (await fetch('/api/gallery')).json();
+
+    if (!filteredData) setGalleryItems(data); // Only set on full load
 
     data.forEach(item => 
     {
@@ -37,7 +41,6 @@ async function loadGallery()
         saveBtn.classList.add('gallery-download');
         saveBtn.style.display = 'none';
 
-        // Toggle to input
         tagContainer.onclick = () => 
         {
             tagContainer.style.display = 'none';
@@ -45,7 +48,6 @@ async function loadGallery()
             saveBtn.style.display = 'inline-block';
         };
 
-        // Save tag updates
         saveBtn.onclick = async () => 
         {
             const newTags = tagInput.value;
@@ -70,14 +72,14 @@ async function loadGallery()
             }
         };
 
-        //Download Btn
+        // Download Button
         const downloadLink = document.createElement('a');
         downloadLink.href = `/static/uploads/${item.filename}`;
         downloadLink.download = item.filename;
         downloadLink.innerText = 'Download';
         downloadLink.classList.add('gallery-download');
 
-        // Delete button
+        // Delete Button
         const deleteBtn = document.createElement('button');
         deleteBtn.innerText = '🗑️ Delete';
         deleteBtn.classList.add('gallery-delete');
@@ -96,12 +98,15 @@ async function loadGallery()
 
             const result = await res.json();
             if (result.success) 
-                loadGallery();
-            else 
+            {
+                loadGallery(); // Reload gallery after delete
+            } else 
+            {
                 alert('Failed to delete file.');
+            }
         };
 
-        // Add all elements to wrapper
+        // Assemble elements
         wrapper.appendChild(img);
         wrapper.appendChild(tagContainer);
         wrapper.appendChild(tagInput);
@@ -113,5 +118,6 @@ async function loadGallery()
     });
 }
 
-window.onload = loadGallery;
-
+// Export for global access
+window.setGalleryItems = setGalleryItems;
+window.loadGallery = loadGallery;
