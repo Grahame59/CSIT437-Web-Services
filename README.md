@@ -48,11 +48,15 @@ There are 2 Projects for 437 Web Services: Flask for Project #1 and React for Pr
 #### How to Run (Project#1): 
 #1. Clone the Repo 
     - (git clone https://github.com/yourusername/CSIT437-Web-Services.git)
+
 #2. Install Flask
     - cd Project1-Flask-MediaTagger
+
 #3. python app.py
     - pip install -r requirements.txt
+
 #4. Run the app.py
+
     - python app.py
 #5. Visit the app in your Browser
     - http://localhost:5000
