@@ -1,0 +1,522 @@
+/* Persistant Root Vars */
+:root 
+{
+    --dansby-purple: rgb(153, 50, 204);
+    --dansby-purple-transparent: rgba(153, 50, 204, 0.75);
+    --lighten-dansby-purple: #753389;
+    --light-purple: #bb73dd;
+    --shadow-purple: #9228b3;
+    --dark-purple: #7e22ce;
+    --section-dark-gray: rgb(50, 50, 50);
+}   
+
+/* ---------------- */
+
+.top-bar
+{
+    height: 30px;
+    width: 100%;
+    background-color: var(--dansby-purple-transparent); /* Dark Orchid with slight transparency */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1050; /* Ensures its above all elements */
+}
+
+/* User Session Section */
+.auth-button-container 
+{
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-btn 
+{
+    background-color: var(--dansby-purple);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background 0.2s ease;
+}
+
+.auth-btn:hover 
+{
+    background-color: var(--dark-purple);
+}
+  
+.auth-avatar 
+{
+    width: 40px;
+    height: 40px;
+    background-color: var(--light-purple);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.auth-dropdown-wrapper 
+{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.auth-dropdown 
+{
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    min-width: 180px;
+    display: flex; /* Ensure children follow flex rules */
+    flex-direction: column; /* Stack Items veritcally */
+    gap: 5px; /* space between items */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition:
+        opacity 0.3s ease,
+        visibility 0s linear 1s,
+        transform 0.3s ease;
+    z-index: 10000;
+}
+
+
+.auth-dropdown-item 
+{
+    display: block; /* Ensure full width inside the dropwdown */
+    padding: 12px 16px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+}
+
+.auth-dropdown-item:hover 
+{
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* --------------------- Navbar Css Section ----------------------- */
+.navbar
+{
+    padding: 20px 0;
+    text-align: center;
+}
+
+.navbar-nav
+{
+    
+    justify-content: flex-start;
+    padding-left: 2rem;
+    gap: 30px;
+    width: 100%;
+}
+
+.nav-logo
+{
+    margin-top: 1.3rem;
+    width: 81px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.logo-link
+{
+    display: flex;
+    align-items: center;
+    padding: inline-block;
+}
+
+.nav-btn 
+{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    width: 140px;
+    vertical-align: middle;
+    text-decoration: none;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 1.5em 2.5em; /* Slightly bigger padding */
+    background: var(--dansby-purple); /* Main button color */
+    border: 2px solid var(--lighten-dansby-purple); /* Slightly lighter purple border */
+    border-radius: 15px; /* More rounded */
+    transform-style: preserve-3d;
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+                background 150ms cubic-bezier(0, 0, 0.58, 1);
+    margin-top: 25px; /* Pushes buttons lower */
+}
+
+.nav-btn::before 
+{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 106%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--light-purple); /* Lighter purple */
+    border-radius: inherit;
+    box-shadow: 0 0 0 2px var(--shadow-purple), 0 10px 10px rgba(0, 0, 0, 0.3); /* Softer shadow */
+    transform: translate3d(0, 8px, -1em); /* Lower 3D depth */
+    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+                box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+
+.nav-btn:hover 
+{
+    background: var(--dark-purple); 
+    transform: translate(0, 3px);
+}
+
+.nav-btn:hover::before 
+{
+    box-shadow: 0 0 0 2px var(--shadow-purple), 0 7px 7px rgba(0, 0, 0, 0.3); /* Lighter shadow */
+    transform: translate3d(0, 5px, -1em);
+}
+
+.nav-btn:active 
+{
+    background: #5d1794;
+    transform: translate(0, 10px);
+}
+
+.nav-btn:active::before 
+{
+    box-shadow: 0 0 0 2px var(--shadow-purple), 0 0px 0px rgba(0, 0, 0, 0.2); /* Removes shadow on click */
+    transform: translate3d(0, 0, -1em);
+}
+
+/* ------------------- End Navbar Css Section -------------------- */ 
+
+.footer-royal-purple
+{
+    background-color: var(--shadow-purple);
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.footer-icons a 
+{
+    margin-left: 10px; /* Adds spacing between buttons */
+    font-size: 1.2rem; /* Makes icons a bit bigger */
+}
+
+/*------------------- Persistent Styling ------------------- */
+
+footer /* Some extra spacing for all footers -> Could remove only did this for Home page as of now b/c there is no content */
+{
+  margin-top: 1.5rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Subtle lift */
+}
+
+body 
+{
+    padding-top: 0px; /* Adjust based on navbar height.. curently = 0 so no push down of page */
+}
+
+* 
+{
+    transition: all 0.3s ease-in-out;
+}
+
+/*-------------------------------*/
+
+/* ------ Dansby Lite CSS ------ */
+
+/* Layout wrapper */
+.dansby-layout 
+{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 40px;
+}
+
+/* Sidebar on the left */
+.dansby-sidebar 
+{
+    margin-left: 10px;
+    width: 220px;
+    background-color: rgb(60, 60, 60);
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.dansby-sidebar h4 
+{
+    color: #bb44ff;
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.dansby-sidebar ul 
+{
+    padding-left: 20px;
+}
+
+.dansby-sidebar li 
+{
+    list-style: none;
+    padding: 4px 0;
+}
+
+.dansby-divider
+{
+    border: none;
+    border-top: 4px solid #9932cc; /* bold + purple */
+    margin: 1rem 0;
+    width: 100%;
+}
+
+/* Main Chat Area */
+.dansby-main 
+{
+    flex: 1;
+}
+
+body.dansby-lite-page
+{
+    background-color: rgb(75,75,75) !important;
+
+}
+
+.dansby-title-bar
+{
+    background-color: #9932cc;
+    color: rgb(230, 227, 227);
+    width: 500px;
+    height: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9); /* Subtle lift */
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-weight: bolder;
+
+}
+
+.dansby-chatbox 
+{
+    height: 550px; 
+    overflow-y: auto;
+    background-color: rgb(100, 100, 100);
+    color: white;
+    border-radius: 3px;
+    border-color: #9932cc;
+    border: 10px;
+}
+
+.dansby-input-bar
+{
+    background-color: #9932cc !important;
+    color: white !important;
+    padding: 10px;
+    gap: 10px;
+}
+
+.dansby-send-btn
+{
+    background-color: #a04bca !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Dansby Informative Section on dansby-lite page */
+
+.dansby-informative 
+{
+    padding: 40px;
+    background-color: rgb(60, 60, 60);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.dansby-informative h2 
+{
+    color: #bb44ff;
+    font-family: 'Anton', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #9932cc;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Dansby-Lite Glowing Div Bar  */
+.dansby-divider-glow 
+{
+    position: relative;
+    height: 4px;
+    width: 100%;
+    background-color: #9932cc;
+    margin: 40px 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Outer Pulse Glow */
+.dansby-divider-glow::after 
+{
+    content: "";
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 90px;
+    background: radial-gradient(ellipse at center, rgba(238, 130, 255, 0.8) 0%, rgba(238, 130, 255, 0.3) 50%, transparent 80%);
+    opacity: 0.6;
+    filter: blur(30px);
+    animation: glowPulse 2s infinite ease-in-out;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Scan Line */
+.dansby-divider-glow::before 
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 150, 255, 0.4), transparent);
+    animation: glowSlide 2s infinite linear;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes glowPulse 
+{
+    0%, 100% { opacity: 0.4; filter: blur(20px); }
+    50% { opacity: 1; filter: blur(35px); }
+}
+
+@keyframes glowSlide 
+{
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(50%); }
+}
+
+/* ------------------------------------------------------------------
+   Dansby Lite - Tablet & Mobile Layout Adjustments
+-------------------------------------------------------------------*/
+
+@media (max-width: 1024px) 
+{
+    .dansby-layout 
+    {
+      flex-direction: column;
+      padding: 20px;
+    }
+  
+    .dansby-sidebar 
+    {
+      width: 100%;
+      margin-left: 0;
+      margin-bottom: 20px;
+    }
+  
+    .dansby-title-bar 
+    {
+      width: 100%;
+      font-size: 1.4rem;
+      padding: 15px 10px;
+    }
+  
+    .dansby-main 
+    {
+      width: 100%;
+    }
+  
+    .dansby-chatbox 
+    {
+      height: 400px;
+    }
+}
+  
+@media (max-width: 767px) 
+{
+    .navbar-nav 
+    {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding-left: 0;
+    }
+  
+    .nav-btn 
+    {
+      width: 100%;
+      padding: 1em;
+      font-size: 14px;
+    }
+  
+    .dansby-title-bar 
+    {
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 15px 10px;
+    }
+  
+    .dansby-chatbox 
+    {
+      height: 300px;
+    }
+  
+    .dansby-informative 
+    {
+      padding: 20px;
+    }
+  
+    .footer-royal-purple 
+    {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+}
